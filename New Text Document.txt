@@ -1,0 +1,22 @@
+https://developer.amazon.com/docs/smarthome/steps-to-build-a-smart-home-skill.html
+skill id amzn1.ask.skill.570b64da-ab0e-40f5-b3e0-b091def8e6f4
+oauth https://www.youtube.com/watch?v=CPbvxxslDTU
+amazon security profile client id 
+amzn1.application-oa2-client.d2e8538c84d9484bbcf9bffaa75dd14d
+client secret
+287d7f40ad7f4297055851e239cffeefe2e79cd8b706204e31cf97bfb44d837c
+redirest url
+https://layla.amazon.com/api/skill/link/M1CJZG81BDG27
+
+account linking
+https://developer.amazon.com/blogs/post/Tx3CX1ETRZZ2NPC/Alexa-Account-Linking-5-Steps-to-Seamlessly-Link-Your-Alexa-Skill-with-Login-wit
+after this enable lwa
+git repo 
+https://github.com/alexa/skill-sample-nodejs-smarthome-switch/blob/master/instructions/configure-the-skill.md
+understanding smart home skill api
+https://developer.amazon.com/docs/smarthome/understand-the-smart-home-skill-api.html
+smart home skill for light
+https://developer.amazon.com/docs/smarthome/build-smart-home-skills-for-lights.html
+json editor
+
+https://jsoneditoronline.org/
