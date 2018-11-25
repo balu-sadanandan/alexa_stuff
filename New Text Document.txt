@@ -20,3 +20,24 @@ https://developer.amazon.com/docs/smarthome/build-smart-home-skills-for-lights.h
 json editor
 
 https://jsoneditoronline.org/
+
+tutorial
+https://github.com/alexa/alexa-smarthome/wiki/Build-a-Working-Smart-Home-Skill-in-15-Minutes
+
+api reference
+https://developer.amazon.com/docs/smarthome/smart-home-skill-api-message-reference.html
+
+mqtt
+https://www.youtube.com/watch?v=LKz1jYngpcU
+
+https://in.mathworks.com/help/thingspeak/use-desktop-mqtt-client-to-publish-to-a-channel.html
+
+https://www.youtube.com/watch?v=NjKK5ab0-Kk
+
+https://www.youtube.com/watch?v=EIxdz-2rhLs
+https://randomnerdtutorials.com/what-is-mqtt-and-how-it-works/
+
+esp32 board manager url
+https://github.com/arduino/Arduino/wiki/Unofficial-list-of-3rd-party-boards-support-urls
+esp32 boardmanager installation
+https://randomnerdtutorials.com/installing-the-esp32-board-in-arduino-ide-windows-instructions/
