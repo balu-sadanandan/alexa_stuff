@@ -9,7 +9,60 @@ exports.handler = function (request, context) {
             handlePowerControl(request, context);
         }
     }
-
+     else if (request.directive.header.namespace === 'Alexa') {
+       if(request.directive.header.name ==='ReportState' ){
+        handleReportState(request,context); 
+       }
+    }
+    else{
+        log("DEBUG:", "unknown request", JSON.stringify(request));
+    }
+    
+    function handleReportState(request,context){
+    var responseHeader = request.directive.header;
+    responseHeader.namespace = "Alexa";
+    responseHeader.name = "ChangeReport";
+    responseHeader.messageId = responseHeader.messageId;  
+    // get user token pass in request
+    var requestToken = request.directive.endpoint.scope.token;
+    var time=new Date()
+    var contextResult = {
+            "properties": [{
+                "namespace": "Alexa.PowerController",
+                "name": "powerState",
+                "value": "ON",
+                "timeOfSample":  time, //retrieve from result.
+                "uncertaintyInMilliseconds": 50
+            },
+            {
+                "namespace": "Alexa.EndpointHealth",
+                "name": "connectivity",
+                "value": {
+                    "value": "OK"
+                },
+                "timeOfSample": time ,
+                "uncertaintyInMilliseconds": 0
+            }]
+        };    
+    var endpoint =request.directive.endpoint    
+    var response={
+        context: contextResult,
+        event: {
+                header: responseHeader,
+                endpoint: {
+                    scope: {
+                        type: "Token of the bearer",
+                        token: requestToken
+                    },
+                    endpointId: "orld"
+                },
+                payload: {}
+            }
+         };   
+         response.event.endpoint=endpoint;
+        log("DEBUG", "ReportState ", JSON.stringify(response));
+        context.succeed(response); 
+    }
     function handleDiscovery(request, context) {
         var payload = {
             "endpoints":
@@ -64,10 +117,11 @@ exports.handler = function (request, context) {
         var responseHeader = request.directive.header;
         responseHeader.namespace = "Alexa";
         responseHeader.name = "Response";
-        responseHeader.messageId = responseHeader.messageId + "-R";
+        responseHeader.messageId = responseHeader.messageId ;
         // get user token pass in request
         var requestToken = request.directive.endpoint.scope.token;
         var powerResult;
+        var time=new Date()
 
         if (requestMethod === "TurnOn") {
 
@@ -85,10 +139,20 @@ exports.handler = function (request, context) {
                 "namespace": "Alexa.PowerController",
                 "name": "powerState",
                 "value": powerResult,
-                "timeOfSample": "2017-09-03T16:20:50.52Z", //retrieve from result.
+                "timeOfSample":time, //retrieve from result.
                 "uncertaintyInMilliseconds": 50
+            },
+            {
+                "namespace": "Alexa.EndpointHealth",
+                "name": "connectivity",
+                "value": {
+                    "value": "OK"
+                },
+                "timeOfSample": time,
+                "uncertaintyInMilliseconds": 0
             }]
         };
+        var endpoint =request.directive.endpoint 
         var response = {
             context: contextResult,
             event: {
@@ -98,11 +162,13 @@ exports.handler = function (request, context) {
                         type: "BearerToken",
                         token: requestToken
                     },
-                    endpointId: "demo_id"
+                    endpointId: "hello_world"
                 },
                 payload: {}
             }
         };
+        response.event.endpoint=endpoint;
+        
         log("DEBUG", "Alexa.PowerController ", JSON.stringify(response));
         context.succeed(response);
     }
