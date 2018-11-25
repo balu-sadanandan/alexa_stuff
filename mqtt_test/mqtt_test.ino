@@ -98,7 +98,7 @@ void reconnect() {
     if (client.connect(clientId.c_str(),userName.c_str(),password.c_str())) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish("channels/636087/publish/SIL2NZOBYKW80QU6", "field1=72&status=MQTTPUBLISH");
+//      client.publish("channels/636087/publish/SIL2NZOBYKW80QU6", "field1=72&status=MQTTPUBLISH");
       // ... and resubscribe
       client.subscribe("channels/636087/subscribe/fields/field1/SIL2NZOBYKW80QU6");
     } else {
@@ -129,6 +129,7 @@ void loop()
   checkForWifiStatus();
 delay(1000);
 if (!client.connected()) {
+    checkForWifiStatus();  
     reconnect();
   }
   client.loop();

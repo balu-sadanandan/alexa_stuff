@@ -124,79 +124,29 @@ exports.handler = function (request, context) {
 
 
         var time=new Date()
-        var http = require('http'); 
-        
-        
+        const get_request = require('request');
+
         if (requestMethod === "TurnOn") {
 
             // Make the call to your device cloud for control
 
             console.log("turning on light " ); 
-             http.get('http://api.thingspeak.com/update?api_key=SIL2NZOBYKW80QU6&field1=0', function(res) { 
-                 console.log("Got response: " + res.statusCode); 
-                  powerResult = "ON";
-                 var contextResult = {
-            "properties": [{
-                "namespace": "Alexa.PowerController",
-                "name": "powerState",
-                "value": powerResult,
-                "timeOfSample":time, //retrieve from result.
-                "uncertaintyInMilliseconds": 50
-            },
-            {
-                "namespace": "Alexa.EndpointHealth",
-                "name": "connectivity",
-                "value": {
-                    "value": "OK"
-                },
-                "timeOfSample": time,
-                "uncertaintyInMilliseconds": 0
-            }]
-        };
-        var endpoint =request.directive.endpoint 
-        var response = {
-            context: contextResult,
-            event: {
-                header: responseHeader,
-                endpoint: {
-                    scope: {
-                        type: "BearerToken",
-                        token: requestToken
-                    },
-                    endpointId: "hello_world"
-                },
-                payload: {}
-            }
-        };
-        response.event.endpoint=endpoint;
-        
-        log("DEBUG", "Alexa.PowerController ", JSON.stringify(response));
-        context.succeed(response); 
-                  }).on('error', function(e) { 
-                         console.log("Got error: " + e.message); 
-                         context.done(null, 'FAILURE');
-                    });  
-              console.log('end of request  ' ); 
+            request('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', { json: true }, (err, res, body) => {
+                if (err) { return console.log(err); }
+                console.log(body.url);
+                console.log(body.explanation);
+                });
  
             // powerResult = stubControlFunctionToYourCloud(endpointId, token, request);
             
-           
-       
-        
-    }
-
-    
+            powerResult = "ON";
+        }
        else if (requestMethod === "TurnOff") {
             // Make the call to your device cloud for control and check for success
             // powerResult = stubControlFunctionToYourCloud(endpointId, token, request);
             powerResult = "OFF";
-            // Make the call to your device cloud for control
-
-            console.log("turning off light " ); 
-             http.get('http://api.thingspeak.com/update?api_key=SIL2NZOBYKW80QU6&field1=1', function(res) { 
-                 console.log("Got response: " + res.statusCode); 
-                  powerResult = "ON";
-                 var contextResult = {
+        }
+        var contextResult = {
             "properties": [{
                 "namespace": "Alexa.PowerController",
                 "name": "powerState",
@@ -232,16 +182,8 @@ exports.handler = function (request, context) {
         response.event.endpoint=endpoint;
         
         log("DEBUG", "Alexa.PowerController ", JSON.stringify(response));
-        context.succeed(response); 
-                  }).on('error', function(e) { 
-                         console.log("Got error: " + e.message); 
-                         context.done(null, 'FAILURE');
-                    });  
-              console.log('end of request  ' ); 
- 
-            // powerResult = stubControlFunctionToYourCloud(endpointId, token, request);
-            
-           
-        }
-    }    
+        context.succeed(response);
+    }
+    var https = require('https');
+
 };

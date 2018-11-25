@@ -29,7 +29,7 @@ https://developer.amazon.com/docs/smarthome/smart-home-skill-api-message-referen
 
 mqtt
 https://www.youtube.com/watch?v=LKz1jYngpcU
-
+thingspeak
 https://in.mathworks.com/help/thingspeak/use-desktop-mqtt-client-to-publish-to-a-channel.html
 
 https://www.youtube.com/watch?v=NjKK5ab0-Kk
